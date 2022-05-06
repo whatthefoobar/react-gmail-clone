@@ -3,10 +3,17 @@ import './EmailRow.css';
 import { Checkbox, IconButton } from '@mui/material';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import { useNavigate } from 'react-router-dom';
 
 const EmailRow = ({ title, subject, description, time }) => {
+  const navigate = useNavigate(); //replaces useHistory
   return (
-    <div className="emailRow">
+    <div
+      onClick={() => {
+        navigate('/mail');
+      }}
+      className="emailRow"
+    >
       <div className="emailRow__options">
         <Checkbox />
         <IconButton>

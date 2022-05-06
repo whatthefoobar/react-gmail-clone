@@ -13,13 +13,20 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import PrintIcon from '@mui/icons-material/Print';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useNavigate } from 'react-router-dom';
 
 function Mail() {
+  const navigate = useNavigate(); //replaces useHistory
+
   return (
     <div className="mail">
       <div className="mail__tools">
         <div className="mail__toolsLeft">
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              navigate('/');
+            }}
+          >
             <ArrowBackIcon />
           </IconButton>
           <IconButton>
@@ -63,14 +70,18 @@ function Mail() {
 
       <div className="mail__body">
         <div className="mail__bodyHeader">
-          <h2></h2>
+          <h2>Mail msg</h2>
           <LabelImportantIcon className="mail__important" />
-          <p></p>
-          <p className="mail__time"></p>
+          <p>Testing testing 123</p>
+          <p className="mail__time">10pm</p>
         </div>
 
         <div className="mail__message">
-          <p></p>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum
+            tempora beatae, repellat accusamus reprehenderit id quidem corrupti
+            tenetur cum velit.
+          </p>
         </div>
       </div>
     </div>
