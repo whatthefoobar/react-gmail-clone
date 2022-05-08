@@ -13,23 +13,25 @@ import PeopleIcon from '@mui/icons-material/People';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Section from '../Section/Section';
 import EmailRow from '../EmailRow/EmailRow';
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { db } from '../../firebase';
 
 function EmailList() {
-  // const [emails, setEmails] = useState([]);
+  const [emails, setEmails] = useState([]);
 
-  // useEffect(() => {
-  //   db.collection('emails')
-  //     .orderBy('timestamp', 'desc')
-  //     .onSnapshot((snapshot) =>
-  //       setEmails(
-  //         snapshot.docs.map((doc) => ({
-  //           id: doc.id,
-  //           data: doc.data(),
-  //         }))
-  //       )
-  //     );
-  // }, []);
+  useEffect(() => {
+    db.collection('emails')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) =>
+        setEmails(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+  }, []);
+  console.log(emails);
 
   return (
     <div className="emailList">
@@ -71,18 +73,16 @@ function EmailList() {
       </div>
 
       <div className="emailList__list">
-        <EmailRow
-          title="hubby"
-          subject="are you still coding?"
-          description="this is a test"
-          time="7pm"
-        />
-        <EmailRow
-          title="hubby"
-          subject="babe? you can stop coding now"
-          description="this is a test"
-          time="8pm"
-        />
+        {emails.map(({ id, data: { to, subject, message, timestamp } }) => (
+          <EmailRow
+            id={id}
+            key={id}
+            title={to}
+            subject={subject}
+            description={message}
+            time={timestamp && new Date(timestamp.seconds * 1000).toUTCString()}
+          />
+        ))}
       </div>
     </div>
   );

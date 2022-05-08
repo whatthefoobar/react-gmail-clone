@@ -4,16 +4,29 @@ import { Checkbox, IconButton } from '@mui/material';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import { useNavigate } from 'react-router-dom';
+import { selectMail } from '../../features/mailSlice';
+import { useDispatch } from 'react-redux';
 
-const EmailRow = ({ title, subject, description, time }) => {
+const EmailRow = ({ id, title, subject, description, time }) => {
   const navigate = useNavigate(); //replaces useHistory
+  const dispatch = useDispatch();
+
+  const openMail = () => {
+    dispatch(
+      selectMail({
+        id,
+        title,
+        subject,
+        description,
+        time,
+      })
+    );
+
+    navigate('/mail');
+  };
+
   return (
-    <div
-      onClick={() => {
-        navigate('/mail');
-      }}
-      className="emailRow"
-    >
+    <div onClick={openMail} className="emailRow">
       <div className="emailRow__options">
         <Checkbox />
         <IconButton>
