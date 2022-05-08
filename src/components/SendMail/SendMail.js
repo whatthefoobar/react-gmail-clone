@@ -5,6 +5,10 @@ import './SendMail.css';
 import { useForm } from 'react-hook-form';
 import { closeSendMessage } from '../../features/mailSlice';
 import { useDispatch } from 'react-redux';
+import { db } from '../../firebase';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 function SendMail() {
   const {
@@ -17,16 +21,15 @@ function SendMail() {
 
   const onSubmit = (formData) => {
     console.log(formData);
-    // db.collection("emails").add(
-    //   {
-    //     to: formData.to,
-    //     subject: formData.subject,
-    //     message: formData.message,
-    //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //   });
-
-    // dispatch(closeSendMessage());
+    db.collection('emails').add({
+      to: formData.to,
+      subject: formData.subject,
+      message: formData.message,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    dispatch(closeSendMessage()); // closes the form
   };
+
   return (
     <div className="sendMail">
       <div className="sendMail__header">

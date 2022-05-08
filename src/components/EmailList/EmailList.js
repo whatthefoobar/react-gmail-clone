@@ -1,3 +1,4 @@
+import React from 'react';
 import { Checkbox, IconButton } from '@mui/material';
 import './EmailList.css';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -12,8 +13,24 @@ import PeopleIcon from '@mui/icons-material/People';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Section from '../Section/Section';
 import EmailRow from '../EmailRow/EmailRow';
+// import { useEffect, useState } from 'react';
 
 function EmailList() {
+  // const [emails, setEmails] = useState([]);
+
+  // useEffect(() => {
+  //   db.collection('emails')
+  //     .orderBy('timestamp', 'desc')
+  //     .onSnapshot((snapshot) =>
+  //       setEmails(
+  //         snapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       )
+  //     );
+  // }, []);
+
   return (
     <div className="emailList">
       <div className="emailList__settings">
