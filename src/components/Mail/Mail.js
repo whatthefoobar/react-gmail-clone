@@ -20,7 +20,7 @@ import { selectOpenMail } from '../../features/mailSlice';
 function Mail() {
   const navigate = useNavigate(); //replaces useHistory
   const selectedMail = useSelector(selectOpenMail);
-  console.log(selectedMail);
+  // console.log(selectedMail);
 
   return (
     <div className="mail">
@@ -74,14 +74,14 @@ function Mail() {
 
       <div className="mail__body">
         <div className="mail__bodyHeader">
-          <h2>{selectedMail && selectedMail.subject}</h2>
+          <h2>{selectedMail?.subject}</h2>
           <LabelImportantIcon className="mail__important" />
-          <p>{selectedMail && selectedMail.title}</p>
-          <p className="mail__time">{selectedMail && selectedMail.time}</p>
+          <p>{selectedMail?.title}</p>
+          <p className="mail__time">{selectedMail?.time}</p>
         </div>
 
         <div className="mail__message">
-          <p>{selectedMail && selectedMail.description}</p>
+          <p>{selectedMail?.description}</p>
         </div>
       </div>
     </div>
